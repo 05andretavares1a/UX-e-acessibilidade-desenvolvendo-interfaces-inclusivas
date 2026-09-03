@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SêniorSeg - Segurança e Verificação para Idosos</title>
+    <style>
+        :root {
+            --primary: #1A5F7A;
+            --secondary: #57C5B6;
+            --accent: #FFC93C;
+            --background: #F8F9FA;
+            --text: #212529;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background);
+            color: var(--text);
+            font-size: 18px; /* Fonte maior para melhor acessibilidade */
+            line-height: 1.6;
+        }
+
+        /* Cabecalho */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Banner Principal */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Seção de Verificação */
+        .verification-container {
+            max-width: 600px;
+            margin: -2rem auto 3rem auto;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .verification-container h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 0.8rem;
+            font-size: 1rem;
+            border: 2px solid #DDD;
+            border-radius: 6px;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--secondary);
+        }
+
+        #result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: bold;
+        }
+
+        .success { background-color: #D4EDDA; color: #155724; }
+        .error { background-color: #F8D7DA; color: #721C24; }
+
+        /* Recursos de Segurança */
+        .features {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SêniorSeg</h1>
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#verificar">Verificador</a>
+            <a href="#dicas">Dicas</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <h2>Proteção e Segurança para a Terceira Idade</h2>
+        <p>Verifique cadastros de cuidadores, links suspeitos e encontre orientações de segurança.</p>
+    </section>
+
+    <section class="verification-container" id="verificar">
+        <h3>Portal de Verificação Rápida</h3>
+        <p>Digite o CPF do cuidador registrado ou um link para checar a segurança:</p>
+        <div class="input-group">
+            <input type="text" id="verifyInput" placeholder="Digite um CPF ou URL...">
+            <button onclick="verificar()">Verificar</button>
+        </div>
+        <div id="result"></div>
+    </section>
+
+    <section class="features" id="dicas">
+        <div class="card">
+            <h3>Cuidadores Verificados</h3>
+            <p>Consulte nosso banco de dados de profissionais com checagem de antecedentes e qualificações validadas.</p>
+        </div>
+        <div class="card">
+            <h3>Prevenção contra Golpes</h3>
+            <p>Aprenda a identificar chamadas falsas, mensagens suspeitas no WhatsApp e fraudes bancárias comuns.</p>
+        </div>
+        <div class="card">
+            <h3>Segurança Residencial</h3>
+            <p>Dicas de adaptação da casa para evitar quedas e instalação de sistemas de monitoramento seguro.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 SêniorSeg - Mantendo nossos idosos protegidos.</p>
+    </footer>
+
+    <script>
+        function verificar() {
+            const input = document.getElementById('verifyInput').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            if (!input) {
+                resultDiv.className = 'error';
+                resultDiv.innerText = 'Por favor, insira um dado válido para verificação.';
+                resultDiv.style.display = 'block';
+                return;
+            }
+
+            // Exemplo de lógica de verificação simulada
+            resultDiv.style.display = 'block';
+            
+            if (input.includes('.com') || input.includes('http')) {
+                // Simulação para links
+                resultDiv.className = 'success';
+                resultDiv.innerText = '✓ Link Verificado: Nenhum risco detectado nesta URL.';
+            } else if (input.length >= 11) {
+                // Simulação para CPF
+                resultDiv.className = 'success';
+                resultDiv.innerText = '✓ Profissional Verificado: Cadastro ativo e credenciais validadas.';
+            } else {
+                resultDiv.className = 'error';
+                resultDiv.innerText = '⚠️ Atenção: Registro não encontrado ou formato inválido.';
+            }
+        }
+    </script>
+
+</body>
+</html>
